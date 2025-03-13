@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kino : Cine | Spanish Film Screenings in Germany</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Color Variables */
+        :root {
+            --background: #FFF8F0;
+            --heading: #D32F2F;
+            --text: #333333;
+            --soft-grey: #666666;
+            --border: #E0E0E0;
+        }
+        
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Typography */
+        h1, h2, h3 {
+            color: var(--heading);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 4.5rem;
+            letter-spacing: -1px;
+            margin-bottom: 30px;
+            line-height: 1;
+            font-family: 'Bricolage Grotesque', sans-serif;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--heading);
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+        
+        a {
+            color: var(--heading);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        /* Header */
+        header {
+            padding: 40px 0 20px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+        
+        /* Language Toggle */
+        .language-toggle {
+            position: absolute;
+            top: 20px;
+            right: 0;
+            display: flex;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .language-toggle button {
+            background: none;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .language-toggle button.active {
+            background-color: var(--heading);
+            color: white;
+        }
+        
+        .language-toggle button:not(.active):hover {
+            background-color: #f0f0f0;
+        }
+        
+        .tagline {
+            color: #444444;
+            font-style: italic;
+            margin-top: -30px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        /* Main Content */
+        main {
+            padding-bottom: 40px;
+        }
+        
+        /* Section Title */
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--heading);
+            margin: 0 0 20px;
+            font-weight: 700;
+            font-family: 'Bricolage Grotesque', sans-serif;
+        }
+        
+        /* City Sections */
+        .city-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .city-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .city {
+            margin-bottom: 20px;
+        }
+        
+        .city h4 {
+            color: var(--text);
+            font-size: 1.1rem;
+            margin: 0 0 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        /* Info Cards */
+        .info-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 4px;
+            margin: 25px 0;
+            position: relative;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--heading);
+        }
+        
+        /* Contact Link */
+        .contact-link {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: transparent;
+            color: var(--heading);
+            border: 1px solid var(--heading);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            background-color: rgba(211, 47, 47, 0.1);
+            text-decoration: none;
+        }
+        
+        .cinema {
+            margin-bottom: 15px;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .cinema:last-child {
+            margin-bottom: 0;
+        }
+        
+        .cinema-name {
+            font-weight: normal;
+            display: inline-block;
+        }
+        
+        .cinema-name::after {
+            content: " | ";
+            margin: 0 1px;
+            color: var(--text);
+            font-weight: normal;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px 0;
+            color: var(--soft-grey);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        footer a {
+            text-decoration: underline;
+            font-weight: 600;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+            
+            .date-range {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            header {
+                padding: 20px 0;
+            }
+            
+            .city h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Kino : Cine</h1>
+        <p class="tagline">Spanischsprachige Filmvorführungen in Deutschland</p>
+        <div class="language-toggle">
+            <button class="active" onclick="switchLanguage('de')">DE</button>
+            <button onclick="switchLanguage('es')">ES</button>
+        </div>
+    </header>
+    
+    <main>
+        <div class="info-card">
+            <h3 class="section-title">Kinos</h3>
+            
+            <div class="city-container">
+                <div class="city">
+                    <h4>Berlin</h4>
+                    <div class="cinema">
+                        <span class="cinema-name">Yorck</span>
+                        <a href="https://go.yorck.de/cine" target="_blank">Cine en Español</a>
+                    </div>
+                </div>
+                
+                <div class="city">
+                    <h4>Hamburg</h4>
+                    <div class="cinema">
+                        <span class="cinema-name">Kino 3001</span>
+                        <a href="https://www.3001-kino.de/specials/cine-club-espanol/" target="_blank">Cine Club Español</a>
+                    </div>
+                </div>
+                
+                <div class="city">
+                    <h4>München</h4>
+                    <div class="cinema">
+                        <span class="cinema-name">City Kinos</span>
+                        <a href="https://www.city-kinos.de/en/specials/cine-en-espanol-munich" target="_blank">Cine en Español</a>
+                    </div>
+                    
+                    <div class="cinema">
+                        <span class="cinema-name">Studio Isabella</span>
+                        <a href="https://studio-isabella.com/cine-espanol/" target="_blank">Cine Español</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-card">
+            <h3 class="section-title">Über uns</h3>
+            <p>Eine Sammlung spanischsprachiger Filmvorführungen in deutschen Kinos. Genießen Sie das beste des spanischen und lateinamerikanischen Kinos.</p>
+        </div>
+        
+        <div class="info-card">
+            <h3 class="section-title">Demnächst</h3>
+            <p>Hier werden bald kommende Filmvorführungen und Veranstaltungen angezeigt.</p>
+        </div>
+        
+        <div class="info-card">
+            <h3 class="section-title">Kontakt</h3>
+            <p>Kennen Sie andere Kinos in Deutschland, die spanischsprachige Filme zeigen?</p>
+            <p><a href="mailto:cairocinemacafe@gmail.com" class="contact-link">Schreiben Sie uns hier</a></p>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 <a href="https://www.ricardoancona.com" target="_blank">Ricardo Ancona</a></p>
+    </footer>
+
+    <script>
+        function switchLanguage(lang) {
+            const translations = {
+                'de': {
+                    title: 'Kino : Cine',
+                    subtitle: 'Spanischsprachige Filmvorführungen in Deutschland',
+                    kinos_title: 'Kinos',
+                    berlin: 'Berlin',
+                    hamburg: 'Hamburg',
+                    muenchen: 'München',
+                    about_title: 'Über uns',
+                    about_text: 'Eine Sammlung spanischsprachiger Filmvorführungen in deutschen Kinos. Genießen Sie das beste des spanischen und lateinamerikanischen Kinos.',
+                    upcoming_title: 'Demnächst',
+                    upcoming_text: 'Hier werden bald kommende Filmvorführungen und Veranstaltungen angezeigt.',
+                    contact_title: 'Kontakt',
+                    contact_text: 'Kennen Sie andere Kinos in Deutschland, die spanischsprachige Filme zeigen?',
+                    contact_link: 'Schreiben Sie uns hier',
+                    footer: '© 2025 <a href="https://www.ricardoancona.com" target="_blank">Ricardo Ancona</a>'
+                },
+                'es': {
+                    title: 'Cine : Kino',
+                    subtitle: 'Proyecciones de cine en español en Alemania',
+                    kinos_title: 'Cines',
+                    berlin: 'Berlín',
+                    hamburg: 'Hamburgo',
+                    muenchen: 'Múnich',
+                    about_title: 'Sobre nosotros',
+                    about_text: 'Una colección de proyecciones de películas en español en cines alemanes. Disfruta de lo mejor del cine español y latinoamericano.',
+                    upcoming_title: 'Próximamente',
+                    upcoming_text: 'Próximamente se mostrarán aquí los próximos estrenos y eventos.',
+                    contact_title: 'Contacto',
+                    contact_text: '¿Conoces otros cines en Alemania que proyecten películas en español?',
+                    contact_link: 'Escríbenos aquí',
+                    footer: '© 2025 <a href="https://www.ricardoancona.com/es/" target="_blank">Ricardo Ancona</a>'
+                }
+            };
+            
+            // Update text elements
+            document.querySelector('h1').textContent = translations[lang].title;
+            document.querySelector('.tagline').textContent = translations[lang].subtitle;
+            
+            // Update section titles
+            const sectionTitles = document.querySelectorAll('.section-title');
+            sectionTitles[0].textContent = translations[lang].kinos_title;
+            sectionTitles[1].textContent = translations[lang].about_title;
+            sectionTitles[2].textContent = translations[lang].upcoming_title;
+            sectionTitles[3].textContent = translations[lang].contact_title;
+            
+            // Update section content
+            const infoCards = document.querySelectorAll('.info-card');
+            infoCards[1].querySelector('p').textContent = translations[lang].about_text;
+            infoCards[2].querySelector('p').textContent = translations[lang].upcoming_text;
+            infoCards[3].querySelector('p:not(:last-child)').textContent = translations[lang].contact_text;
+            
+            // Update contact link
+            document.querySelector('.contact-link').textContent = translations[lang].contact_link;
+            
+            // Update city headings
+            const cityHeadings = document.querySelectorAll('.city h4');
+            cityHeadings[0].textContent = translations[lang].berlin;
+            cityHeadings[1].textContent = translations[lang].hamburg;
+            cityHeadings[2].textContent = translations[lang].muenchen;
+            
+            // Update footer
+            document.querySelector('footer p').innerHTML = translations[lang].footer;
+            
+            // Update active language button
+            const buttons = document.querySelectorAll('.language-toggle button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+                if (button.textContent.toLowerCase() === lang) {
+                    button.classList.add('active');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
